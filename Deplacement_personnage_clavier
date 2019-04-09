@@ -136,7 +136,7 @@ void animer_perso(Personnage *P, int direction)
             P->indice = 4;
     }
     
-//Quand le personnage peut sauter
+/*Quand le personnage peut sauter*/
  if(direction == 0)
     {  
         P->jumpindice = 12;
@@ -169,7 +169,7 @@ void animer_perso(Personnage *P, int direction)
 
 void UpdatePlayer(Personnage* perso)
 {
-//mis a jour du personnage apres le saut
+/*mis a jour du personnage apres le saut*/
         int collision_sol;
 	if(collision_sol==1)
 	{

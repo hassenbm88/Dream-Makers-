@@ -10,6 +10,8 @@ Computer World 2D
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 
+// getpixel permet la détection de la collision avec le background
+
 SDL_Color GetPixel (SDL_Surface* pSurface , int x , int y)
 {
     SDL_Color color;
@@ -33,3 +35,4 @@ SDL_Color GetPixel (SDL_Surface* pSurface , int x , int y)
     SDL_GetRGB ( col , pSurface->format , &color.r , &color.g , &color.b ) ;
     return ( color ) ;
 }
+ // getpixel.h prend juste le nom de la fonction dans le .c et ses parametres pas de structure 

@@ -6,5 +6,6 @@
 #include <SDL/SDL_image.h>
 
 void pause();
-int gestion_score(int collision,int i);
+int gestion_vie(int vie);
+
 #endif

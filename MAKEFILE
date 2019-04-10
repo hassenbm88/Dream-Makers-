@@ -1,10 +1,14 @@
 prog: Initialiser_Afficher_background.o Getpixel.o Deplacement_personnage_clavier.o Collision_personnage_background.o
 	gcc  Initialiser_Afficher_background.o Getpixel.o Deplacement_personnage_clavier.o Collision_personnage_background.o -o prog -lSDL -lSDL_image -g
+	
 Initialiser_Afficher_background.o:Initialiser_Afficher_background.c
 	gcc -c Initialiser_Afficher_background.c -lSDL -lSDL_image -g
+	
 Getpixel.o:Getpixel.c
 	gcc -c Getpixel.c -lSDL -lSDL_image -g
+	
 Deplacement_personnage_clavier.o:Deplacement_personnage_clavier.c
 	gcc -c Deplacement_personnage_clavier.c -lSDL -lSDL_image -g
+	
  Collision_personnage_background.o :Collision_personnage_background.c
 	gcc -c Collision_personnage_background.c -lSDL -lSDL_image -g

@@ -9,6 +9,7 @@ Computer World 2D
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include "Getpixel.h"
 
 // getpixel permet la détection de la collision avec le background
 

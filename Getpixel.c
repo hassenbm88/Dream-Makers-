@@ -32,7 +32,7 @@ SDL_Color GetPixel (SDL_Surface* pSurface , int x , int y)
 
         //convert color
     }
-    SDL_GetRGB ( col , pSurface->format , &color.r , &color.g , &color.b ) ;
+    SDL_GetRGB ( col , pSurface->format , &color.r , &color.g , &color.b );
     return ( color ) ;
 }
  // getpixel.h prend juste le nom de la fonction dans le .c et ses parametres pas de structure 

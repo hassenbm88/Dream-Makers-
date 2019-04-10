@@ -1,7 +1,15 @@
 # Dream-Makers-
 Computer World 2D 
-#ifndef FILE_PROS_H_INCLUDED
-#define FILE_PROS_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+
 typedef struct 
 {
     int stage;//numero de stage
@@ -19,4 +27,4 @@ typedef struct
 void initialiser_background(background *Back);
 void afficher_background(SDL_Surface *ecran, background Back);
 void scrolling_background(background *Back, int etat);//scroller verticalement et /ou horizontalement tout le cadre si le perso atteint les limites du cadre
-#endif // FILE_PROS_H_INCLUDED
+

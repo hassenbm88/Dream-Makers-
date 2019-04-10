@@ -6,7 +6,7 @@ Computer World 2D
 #include <string.h>
 #include <math.h>
 #include <time.h>
-#include <SDL/SDL.h
+#include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 typedef struct 

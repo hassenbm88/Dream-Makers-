@@ -8,6 +8,7 @@ Computer World 2D
 #include "SDL/SDL_mixer.h"
 #include <string.h>
 #include <math.h>
+#include "Initialiser_Afficher_background.h"
 
 void initialiser_background(background *Back)
 {

@@ -9,6 +9,7 @@ Computer World 2D
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include "Collision_personnage_background.h"
 #include "getpixel.h"
 
  //fonction getpixel.h a été intégrée pour rassurer la collision avec le background

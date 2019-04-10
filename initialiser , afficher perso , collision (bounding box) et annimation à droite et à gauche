@@ -1,0 +1,182 @@
+#include<stdio.h>
+#include "SDL/SDL.h"
+#include<SDL/SDL_image.h>
+#include<SDL/SDL_mixer.h>
+#include<unistd.h>
+#include<limits.h>
+#include<string.h>
+#include <stdlib.h>
+
+
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+    // in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+struct Sprite
+{
+    int id;
+    SDL_Surface *image;
+    SDL_Rect pos;
+    SDL_Rect bounds;
+    int type;
+};
+
+typedef struct Sprite Sprite;
+
+Sprite* Sprite_new(char* img)
+{
+    Sprite* s = malloc(sizeof(Sprite));
+    SDL_Surface* image = IMG_Load(img);
+    s->image = image;
+    s->pos.x = 0;
+    s->pos.y = 0;
+    s->pos.w = image->w;
+    s->pos.h = image->h;
+    s->bounds.x = 0;
+    s->bounds.y = 0;
+    s->bounds.w = image->w;
+    s->bounds.h = image->h;
+    s->type = 1;
+    return s;
+}
+
+Sprite* sprites[100];
+int nsprites = 0;
+
+void AddSprite(Sprite* s)
+{
+    sprites[nsprites] = s;
+    nsprites++;
+    s->id = nsprites;
+}
+
+int CheckCollision(Sprite* s1, Sprite* s2)
+{
+    SDL_Rect r1 = s1->pos;
+    SDL_Rect r2 = s2->pos;
+    if(r1.x>r2.x+r2.w || r1.y>r2.y+r2.h || r2.x>r1.x+r1.w || r2.y>r1.y+r1.h)return 0;
+    printf("collided between %d & %d\n", s1->id, s2->id);
+    printf("test : %d %d %d %d\n", r1.x, r1.y, r1.w, r2.h);
+    return 1;
+}
+
+int CheckAnyCollision(Sprite* s)
+{
+    for(int o=0; o<nsprites; o++)
+    {
+        if(sprites[o]->id==s->id)continue;
+        if(CheckCollision(s, sprites[o]))return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    int nframes = 0;
+    int walkFrames = 0;
+    int walking = 0;
+    int dir = 1;
+
+    char cdir[] = "/home/selmiolfa/Bureau/MY PROJECT/";
+    SDL_Surface *screen;
+    SDL_Surface *image;
+    SDL_Rect positionecran;
+    char pause;
+
+    if(SDL_Init(SDL_INIT_VIDEO) != 0)
+    {
+        printf("error on init\n");
+        return 1;
+    }
+    screen = SDL_SetVideoMode(600, 400, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    if(screen == NULL)
+    {
+        printf("error on video\n");
+        return 1;
+    }
+
+    //
+
+    printf("init complete\n");
+
+    Sprite* pSprite = Sprite_new("character2.png");
+
+    AddSprite(pSprite);
+
+    int pwidth = 50;
+    int pheight = 55;
+    pSprite->pos.h = pheight/10;
+    pSprite->pos.w = pwidth/10;
+
+    AddSprite(Sprite_new("olfa.png"));
+
+    sprites[1]->pos.x = 150;
+
+    SDL_Flip(screen);
+
+    int speed = 1;
+
+    int done = 1;
+    SDL_Event event;
+    while(done)
+    {
+
+        while(SDL_PollEvent( &event ))
+        {
+            switch(event.type)
+            {
+                case SDL_KEYDOWN:
+                    if(event.key.keysym.sym == SDLK_LEFT)walking = 1, dir=-1;
+                    if(event.key.keysym.sym == SDLK_RIGHT)walking = 1, dir=1;
+                    break;
+                case SDL_KEYUP:
+                    if(walking && event.key.keysym.sym == SDLK_LEFT && dir==-1)walking = 0;
+                    if(walking && event.key.keysym.sym == SDLK_RIGHT && dir==1)walking = 0;
+                    break;
+            }
+        }
+
+        if(walking)
+        {
+            int oldPos = pSprite->pos.x;
+            pSprite->pos.x += speed*dir;
+            walkFrames++;
+
+            if(CheckAnyCollision(pSprite))
+            {
+                //printf("collided\n");
+                pSprite->pos.x = oldPos;
+            }
+        }
+        else walkFrames = 0;
+
+
+
+        //setting character frame
+        int charFrame = (walkFrames)%36;
+
+        pSprite->bounds.x = (charFrame%8)*pwidth;
+        pSprite->bounds.y = (charFrame/8)*pheight;
+        pSprite->bounds.h = pheight;
+        pSprite->bounds.w = pwidth;
+
+
+        SDL_FillRect(screen, NULL, 0xffffff);
+
+        for(int o=0; o<nsprites; o++)
+        {
+            SDL_FillRect(screen, &sprites[o]->pos, 0x00ff00);
+            SDL_BlitSurface(sprites[o]->image, &sprites[o]->bounds, screen, &sprites[o]->pos);
+        }
+        SDL_Flip(screen);
+        SDL_Delay(50);
+        nframes++;
+    }
+
+    return 0;
+}

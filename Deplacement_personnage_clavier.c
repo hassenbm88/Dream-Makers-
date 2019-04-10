@@ -8,7 +8,7 @@ Computer World 2D
 #include "SDL/SDL_mixer.h"
 #include <string.h>
 #include <math.h>
-#include "Deplacement_personnage_clavier"
+#include "Deplacement_personnage_clavier.h"
 
 
 

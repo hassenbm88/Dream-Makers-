@@ -1,0 +1,1 @@
+prog: Initialiser_Afficher_background.o Getpixel.o Deplacement_personnage_clavier.o Collision_personnage_background.o

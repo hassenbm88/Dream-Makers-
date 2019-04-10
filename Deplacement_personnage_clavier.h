@@ -1,9 +1,14 @@
 # Dream-Makers-
 Computer World 2D 
-#ifndef FILE_PROS_H_INCLUDED
-#define FILE_PROS_H_INCLUDED
-//#include <SDL/SDL_rotozoom.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include <SDL/SDL.h
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
 typedef struct 
 {
     int vie;//nombre de vie du joueur 
@@ -31,5 +36,5 @@ void afficher_perso(Personnage P, SDL_Surface *ecran);//afficher un 1er et uniqu
 void deplacer_Perso(Personnage *P, int direction);//deplacer un perso moyennant le clavier dans un cadre fixe de la map 
 void animer_perso(Personnage *P, int direction);//animer le perso lors du deplacement
 void UpdatePlayer(Personnage* perso);
-#endif // FILE_PROS_H_INCLUDED
+
 

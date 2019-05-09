@@ -1,10 +1,18 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<SDL/SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include"fonction.h"
-int main(){
-int vie= 3;
-gestion_vie(vie);
-return 0;
+#include <SDL/SDL_mixer.h>
+#include <string.h>
+#include <SDL/SDL_ttf.h>
+#include "jump.h"
+
+int main()
+{
+        jump();
+		
+		//clique echap Pour Quitter
+	return 0;
 }
+
+

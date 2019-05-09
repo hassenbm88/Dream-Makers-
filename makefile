@@ -1,7 +1,2 @@
-prog:game.o main.o
-	gcc game.o main.o -o prog -lSDL -lSDL_image -g
-main.o:main.c
-	gcc -c main.c -lSDL -lSDL_image -g
-game.o:game.c
-	gcc -c game.c -lSDL -lSDL_image -g
-
+prog:*.c
+	gcc -g *.c -o prog -lSDL -lSDL_ttf -lSDL_image -lSDL_mixer -lSDLmain -I/usr/include/SDL -lm -w
